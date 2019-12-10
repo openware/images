@@ -1,0 +1,26 @@
+---
+  kind: pipeline
+  name: default
+  
+  steps:
+    - name: Build updated images
+      image: ruby:2.6.5
+      environment:
+        REGISTRY_USER:
+          from_secret: ow_registry_username
+        REGISTRY_PASSWORD:
+          from_secret: ow_registry_password
+      commands:
+        - bundle install
+        - apt-get update && apt-get -y -v install docker
+        - ls -la
+        - pwd
+        - $PATH
+        - which docker
+        - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+        - bundle exec ow-cli incremental-build --push
+
+  trigger:
+  event:
+    - push
+        
