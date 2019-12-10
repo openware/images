@@ -1,8 +1,9 @@
-#!/bin/ruby
+#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 require 'clamp'
 require 'open3'
+require "English"
 
 module OpenwareCli
   class Base < ::Clamp::Command
@@ -22,8 +23,8 @@ module OpenwareCli
     end
 
     def build(image)
-      shell("docker build -t reg.openware.com/cryptonode/#{image}:#{version(image)} --build-arg=VERSION=#{version(image)} #{image}")
-      shell("docker push reg.openware.com/cryptonode/#{image}:#{version(image)}") if push?
+      shell("docker build -t reg.openware.work/cryptonode/#{image}:#{version(image)} --build-arg=VERSION=#{version(image)} #{image}")
+      shell("docker push reg.openware.work/cryptonode/#{image}:#{version(image)}") if push?
     end
 
     option '--push', :flag, 'Push the image after build', default: false
