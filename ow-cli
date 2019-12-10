@@ -1,0 +1,66 @@
+#!/bin/ruby
+# frozen_string_literal: true
+
+require 'clamp'
+require 'open3'
+
+module OpenwareCli
+  class Base < ::Clamp::Command
+    def shell(command, fail_on_error = true)
+      warn "Executing: #{command}"
+      system(command)
+      raise 'Command failed' if fail_on_error && $CHILD_STATUS.exitstatus != 0
+    end
+  end
+
+  class Build < Base
+    def version(image)
+      path = File.join(image, 'VERSION')
+      raise "#{path} not found" unless File.exist?(path)
+
+      File.read(path).strip
+    end
+
+    def build(image)
+      shell("docker build -t reg.openware.com/cryptonode/#{image}:#{version(image)} --build-arg=VERSION=#{version(image)} #{image}")
+      shell("docker push reg.openware.com/cryptonode/#{image}:#{version(image)}") if push?
+    end
+
+    option '--push', :flag, 'Push the image after build', default: false
+    option '--all-images', :flag, 'Build all images', default: false
+    option '--image', 'IMAGE', 'Build a specific image', default: nil
+    def execute
+      if all_images?
+        warn 'TODO: call build for every image'
+      elsif image
+        build(image)
+      else
+        warn 'Nothing to do'
+      end
+    end
+  end
+
+  class BuildIncremental < Base
+    option '--push', :flag, 'Push the image after build', default: false
+    def execute
+      images.each do |image|
+        params = ['--image', image]
+        params << "--push" if push?
+        Build.run(File.basename($PROGRAM_NAME), params)
+      end
+    end
+
+    def images
+      IO.popen('git log -1 --stat').read
+        .split("\n").map { |s| (m = s.match(%r{^ ([^/]+)/})) && m[1] }
+        .compact.uniq
+    end
+  end
+
+  class Root < ::Clamp::Command
+    subcommand 'build', 'build a specific image', Build
+    subcommand 'incremental-build', 'build images which were changed in the last patch only', BuildIncremental
+  end
+end
+
+OpenwareCli::Root.run
