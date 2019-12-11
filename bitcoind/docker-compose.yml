@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: reg.openware.work/cryptonode/bitcoind:0.19.0.1
+    restart: always
+    user: root
+    command: bitcoind
+    ports:
+      - "8332:8332"
+    volumes:
+      - ./keys/mainnet:/bitcoin/wallet
+      - ./blocks/mainnet:/bitcoin/.bitcoin/blocks
+      - ./config/mainnet-bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
+
+  testnet:
+    image: reg.openware.work/cryptonode/bitcoind:0.19.0.1
+    restart: always
+    user: root
+    command: bitcoind
+    ports:
+      - "18332:18332"
+    volumes:
+      - ./keys/testnet:/bitcoin/wallet
+      - ./blocks/testnet:/bitcoin/.bitcoin/blocks
+      - ./config/testnet-bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf

@@ -14,16 +14,17 @@
         REGISTRY_PASSWORD:
           from_secret: ow_registry_password
       commands:
+        - gem update bundler
         - bundle install
         - curl -fsSL https://get.docker.com | bash
-        - usermod -a -G docker root
         - docker login reg.openware.work -u $REGISTRY_USER -p $REGISTRY_PASSWORD
-        - ./ow-cli incremental-build --push
+        - bundle exec ruby ow-cli incremental-build --push
 
   volumes:
     - name: docker
       host:
         path: /var/run/docker.sock
+
   trigger:
-  event:
+    event:
     - push
