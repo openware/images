@@ -2,8 +2,7 @@
 # frozen_string_literal: true
 
 require 'clamp'
-require 'open3'
-require "English"
+require 'English'
 
 module OpenwareCli
   class Base < ::Clamp::Command
@@ -46,7 +45,7 @@ module OpenwareCli
     def execute
       images.each do |image|
         params = ['--image', image]
-        params << "--push" if push?
+        params << '--push' if push?
         Build.run(File.basename($PROGRAM_NAME), params)
       end
     end
