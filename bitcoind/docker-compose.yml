@@ -22,5 +22,5 @@ services:
       - "18332:18332"
     volumes:
       - ./keys/testnet:/bitcoin/wallet
-      - ./blocks/testnet:/bitcoin/.bitcoin/blocks
+      - ./blocks/testnet:/bitcoin/.bitcoin/testnet3/blocks
       - ./config/testnet-bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
