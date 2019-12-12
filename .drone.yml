@@ -1,6 +1,6 @@
 ---
   kind: pipeline
-  name: main
+  name: New version
 
   steps:
     - name: Build updated images
@@ -26,5 +26,42 @@
         path: /var/run/docker.sock
 
   trigger:
+    branch:
+    - master
     event:
     - push
+
+---
+  kind: pipeline
+  name: Push
+
+  steps:
+    - name: Build updated images
+      image: ruby:2.6.5
+      volumes:
+        - name: docker
+          path: /var/run/docker.sock
+      environment:
+        REGISTRY_USER:
+          from_secret: ow_registry_username
+        REGISTRY_PASSWORD:
+          from_secret: ow_registry_password
+      commands:
+        - gem update bundler
+        - bundle install
+        - curl -fsSL https://get.docker.com | bash
+        - docker login reg.openware.work -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+        - bundle exec ruby ow-cli incremental-build 
+
+  volumes:
+    - name: docker
+      host:
+        path: /var/run/docker.sock
+
+  trigger:
+    event:
+      - push
+    branch:
+      exclude:
+      - master
+        
