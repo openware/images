@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: reg.openware.work/cryptonode/parity:2.5.11
+    restart: always
+    user: root
+    command: parity
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/mainnet:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/mainnet:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/parity-mainnet.toml:/parity/.ethereum/parity.toml
+
+  testnet:
+    image: reg.openware.work/cryptonode/parity:2.5.11
+    restart: always
+    user: root
+    command: parity
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/testnet:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/testnet:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/parity-testnet.toml:/parity/.local/share/io.parity.ethereum/config.toml
