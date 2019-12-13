@@ -1,9 +1,9 @@
 # Bitcoind
 
-## Run Cryptonode
+## Start the cryptonode
 
 ```shell
-docker-compose up -Vd *service*`
+docker-compose up -Vd *mainnet or testnet*`
 ```
 
 ## Usage
