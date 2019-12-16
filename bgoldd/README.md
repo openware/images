@@ -1,4 +1,4 @@
-# Bitcoind
+# Bgoldd
 
 ## Start the cryptonode
 
@@ -52,4 +52,4 @@ curl -H "Content-Type: application/json" --data '{"method": "getbalance", "param
 
 More:
 
-[Bitcoin RPC API](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_calls_list)
+[Bitcoin Gold RPC API](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_calls_list)
