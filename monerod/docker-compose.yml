@@ -1,0 +1,24 @@
+version: '3.6'
+
+services:
+  stagenet-monerod:
+    image: reg.openware.work/cryptonode/monerod:0.15.0.1
+    restart: always
+    command: ./monerod --stagenet --non-interactive 
+    user: root
+    ports:
+      - "38081:38081"
+    volumes:
+      - ./blocks/stagenet:/home/monero/.bitmonero/stagenet/lmdb
+      - ./config/stagenet/bitmonero.conf:/home/monero/.bitmonero/stagenet/bitmonero.conf
+
+  stagenet-wallet:
+    image: reg.openware.work/cryptonode/monerod:0.15.0.1
+    restart: always
+    command: ./monero-wallet-rpc --stagenet --non-interactive --config-file=/home/monero/.bitmonero/stagenet/monero-wallet-rpc.conf
+    user: root
+    ports:
+      - "38082:38082"
+    volumes:
+      - ./keys/stagenet:/home/monero/wallets
+      - ./config/stagenet/monero-wallet-rpc.conf:/home/monero/.bitmonero/stagenet/monero-wallet-rpc.conf
