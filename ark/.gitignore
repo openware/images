@@ -1,0 +1,12 @@
+blocks/mainnet/blk00000.dat
+blocks/mainnet/index/
+blocks/mainnet/rev00000.dat
+keys/mainnet/.walletlock
+keys/mainnet/db.log
+keys/mainnet/wallet.dat
+blocks/testnet/blk00000.dat
+blocks/testnet/index/
+blocks/testnet/rev00000.dat
+keys/testnet/.walletlock
+keys/testnet/db.log
+keys/testnet/wallet.dat

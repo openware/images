@@ -1,0 +1,63 @@
+version: '3.6'
+
+services:
+  postgres:
+    image: "postgres:alpine"
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+     POSTGRES_PASSWORD: password
+     POSTGRES_DB: ark_core
+     POSTGRES_USER: ark
+
+  mainnet:
+    image: reg.openware.work/cryptonode/ark:2.5.31
+    restart: always
+    user: root
+    command: "ark relay:start --no-daemon"
+    ports:
+     - "4001:4001"
+     - "4003:4003"
+     - "4040:4040"
+     - "8080:8080"
+    cap_add:
+      - SYS_NICE
+      - SYS_RESOURCE
+      - SYS_TIME
+    volumes:
+     - ./config/mainnet:/home/node/.config/ark-core
+     - ./config/mainnet/mainnet/plugins.js:/home/node/.config/ark-core/mainnet/plugins.js
+     - ./share/mainnet:/home/node/.local/share/ark-core
+     - ./blocks/mainnet/.local/state/ark-core:/home/node/.local/state/ark-core
+     - ./keys/mainnet:/run/secrets
+    env_file: config/mainnet.env
+    depends_on:
+      - postgres
+
+  devnet:
+    image: reg.openware.work/cryptonode/ark:2.5.31
+    restart: always
+    user: root
+    command: "ark relay:start --no-daemon"
+    ports:
+     - "4001:4001"
+     - "4003:4003"
+     - "4040:4040"
+     - "8080:8080"
+    cap_add:
+      - SYS_NICE
+      - SYS_RESOURCE
+      - SYS_TIME
+    volumes:
+    - ./config/devnet:/home/node/.config/ark-core
+    - ./config/devnet/devnet/plugins.js:/home/node/.config/ark-core/devnet/plugins.js
+    - ./share/devnet:/home/node/.local/share/ark-core
+    - ./blocks/devnet/.local/state/ark-core:/home/node/.local/state/ark-core
+    - ./keys/devnet:/run/secrets
+    env_file: config/devnet.env
+    depends_on:
+      - postgres
+
+volumes:
+  postgres:

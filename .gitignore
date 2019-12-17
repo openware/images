@@ -1,2 +1,6 @@
 blocks/
 keys/
+share/
+ark/config
+!plugins.js
+!*.env
