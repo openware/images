@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: reg.openware.work/cryptonode/etc:v1.9.6
+    restart: always
+    user: root
+    command: geth --nousb --config /geth/.ethereum/config/geth.toml
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/mainnet:/geth/.ethereum/classic/keystore
+      - ./blocks/mainnet:/geth/.ethereum/classic/geth/chaindata
+      - ./config/mainnet:/geth/.ethereum/config
+
+  kotti:
+    image: reg.openware.work/cryptonode/etc:v1.9.6
+    restart: always
+    user: root
+    command: geth --nousb --kotti --rpc --rpcaddr=0.0.0.0 --syncmode=fast
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/kotti:/geth/.ethereum/kotti/keystore
+      - ./blocks/kotti:/geth/.ethereum/kotti/geth/chaindata

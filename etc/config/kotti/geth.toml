@@ -1,0 +1,52 @@
+[Eth]
+NetworkId = 6
+SyncMode = "fast"
+NoPruning = false
+NoPrefetch = false
+LightPeers = 100
+UltraLightFraction = 75
+DatabaseCache = 512
+DatabaseFreezer = ""
+TrieCleanCache = 256
+TrieDirtyCache = 256
+TrieTimeout = 3600000000000
+EnablePreimageRecording = false
+EWASMInterpreter = ""
+EVMInterpreter = ""
+
+[Node]
+DataDir = "/geth/.ethereum/kotti"
+omitempty = ""
+NoUSB = true
+IPCPath = "geth.ipc"
+HTTPHost = "0.0.0.0"
+HTTPPort = 8545
+HTTPVirtualHosts = ["localhost"]
+HTTPModules = ["net", "web3", "eth", "shh"]
+WSPort = 8546
+WSModules = ["net", "web3", "eth", "shh"]
+GraphQLPort = 8547
+GraphQLVirtualHosts = ["localhost"]
+
+[Node.P2P]
+MaxPeers = 50
+NoDiscovery = false
+BootstrapNodes = ["enode://06333009fc9ef3c9e174768e495722a7f98fe7afd4660542e983005f85e556028410fd03278944f44cfe5437b1750b5e6bd1738f700fe7da3626d52010d2954c@51.141.15.254:30303", "enode://ae8658da8d255d1992c3ec6e62e11d6e1c5899aa1566504bc1ff96a0c9c8bd44838372be643342553817f5cc7d78f1c83a8093dee13d77b3b0a583c050c81940@18.232.185.151:30303", "enode://67913271d14f445689e8310270c304d42f268428f2de7a4ac0275bea97690e021df6f549f462503ff4c7a81d9dd27288867bbfa2271477d0911378b8944fae55@157.230.239.163:30303", "enode://e8a786a894db053fe6886e283fc4385389ad034e04a692a26335f30b714059efd5cead0e410ecd783ce095888fdafcc21a685f13501594e969d6f5ac7ba0388c@86.103.236.55:63384"]
+BootstrapNodesV5 = ["enode://06333009fc9ef3c9e174768e495722a7f98fe7afd4660542e983005f85e556028410fd03278944f44cfe5437b1750b5e6bd1738f700fe7da3626d52010d2954c@51.141.15.254:30303", "enode://ae8658da8d255d1992c3ec6e62e11d6e1c5899aa1566504bc1ff96a0c9c8bd44838372be643342553817f5cc7d78f1c83a8093dee13d77b3b0a583c050c81940@18.232.185.151:30303", "enode://67913271d14f445689e8310270c304d42f268428f2de7a4ac0275bea97690e021df6f549f462503ff4c7a81d9dd27288867bbfa2271477d0911378b8944fae55@157.230.239.163:30303", "enode://e8a786a894db053fe6886e283fc4385389ad034e04a692a26335f30b714059efd5cead0e410ecd783ce095888fdafcc21a685f13501594e969d6f5ac7ba0388c@86.103.236.55:63384"]
+StaticNodes = []
+TrustedNodes = []
+ListenAddr = ":30303"
+EnableMsgEvents = false
+
+[Eth.TxPool]
+Locals = []
+NoLocals = false
+Journal = "transactions.rlp"
+Rejournal = 3600000000000
+PriceLimit = 1
+PriceBump = 10
+AccountSlots = 16
+GlobalSlots = 4096
+AccountQueue = 64
+GlobalQueue = 1024
+Lifetime = 10800000000000
