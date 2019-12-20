@@ -1,0 +1,63 @@
+version: '3.6'
+
+services:
+  postgres:
+    image: "postgres:alpine"
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+     POSTGRES_PASSWORD: password
+     POSTGRES_DB: ark_core
+     POSTGRES_USER: ark
+
+  mainnet:
+    image: reg.openware.work/cryptonode/tycoon:fbc445c
+    restart: always
+    user: root
+    command: "ark relay:start --no-daemon"
+    ports:
+     - "4001:4001"
+     - "4003:4003"
+     - "4040:4040"
+     - "8080:8080"
+    cap_add:
+      - SYS_NICE
+      - SYS_RESOURCE
+      - SYS_TIME
+    volumes:
+    - ./config/mainnet:/home/node/.config/tycoon-core
+    #- ./config/devnet/devnet/plugins.js:/home/node/.config/tycoon-core/devnet/plugins.js
+    - ./share/mainnet:/home/node/.local/share/tycoon-core
+    - ./blocks/mainnet/.local/state/tycoon-core:/home/node/.local/state/tycoon-core
+    - ./keys/mainnet:/run/secrets
+    env_file: config/mainnet.env
+    depends_on:
+      - postgres
+
+  devnet:
+    image: reg.openware.work/cryptonode/tycoon:fbc445c
+    restart: always
+    user: root
+    command: "ark relay:start --no-daemon"
+    ports:
+     - "4001:4001"
+     - "4003:4003"
+     - "4040:4040"
+     - "8080:8080"
+    cap_add:
+      - SYS_NICE
+      - SYS_RESOURCE
+      - SYS_TIME
+    volumes:
+    - ./config/devnet:/home/node/.config/tycoon-core
+    #- ./config/devnet/devnet/plugins.js:/home/node/.config/tycoon-core/devnet/plugins.js
+    - ./share/devnet:/home/node/.local/share/tycoon-core
+    - ./blocks/devnet/.local/state/tycoon-core:/home/node/.local/state/tycoon-core
+    - ./keys/devnet:/run/secrets
+    env_file: config/devnet.env
+    depends_on:
+      - postgres
+
+volumes:
+  postgres:
