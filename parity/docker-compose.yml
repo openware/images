@@ -11,9 +11,9 @@ services:
     volumes:
       - ./keys/mainnet:/parity/.local/share/io.parity.ethereum/keys
       - ./blocks/mainnet:/parity/.local/share/io.parity.ethereum/chains
-      - ./config/parity-mainnet.toml:/parity/.ethereum/parity.toml
+      - ./config/mainnet/parity.toml:/parity/.ethereum/parity.toml
 
-  testnet:
+  kovan:
     image: reg.openware.work/cryptonode/parity:2.5.11
     restart: always
     user: root
@@ -21,6 +21,31 @@ services:
     ports:
       - "8545:8545"
     volumes:
-      - ./keys/testnet:/parity/.local/share/io.parity.ethereum/keys
-      - ./blocks/testnet:/parity/.local/share/io.parity.ethereum/chains
-      - ./config/parity-testnet.toml:/parity/.local/share/io.parity.ethereum/config.toml
+      - ./keys/kovan:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/kovan:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/kovan/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
+
+  classic:
+    image: reg.openware.work/cryptonode/parity:2.5.11
+    restart: always
+    user: root
+    command: parity
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/classic:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/classic:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/classic/parity.toml:/parity/.ethereum/parity.toml
+
+  kotti:
+    image: reg.openware.work/cryptonode/parity:2.5.11
+    restart: always
+    user: root
+    command: parity
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/kotti:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/kotti:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/kotti/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
+
