@@ -1,0 +1,24 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: reg.openware.work/cryptonode/bgoldd:0.15.2
+    restart: always
+    user: root
+    command: bgoldd
+    ports:
+      - "8332:8332"
+    volumes:
+      - ./data/mainnet:/bitcoingold/.bitcoingold
+      - ./config/mainnet/bitcoingold.conf:/bitcoingold/.bitcoingold/bitcoingold.conf
+
+  testnet:
+    image: reg.openware.work/cryptonode/bgoldd:0.15.2
+    restart: always
+    user: root
+    command: bgoldd
+    ports:
+      - "18332:18332"
+    volumes:
+      - ./data/testnet:/bitcoingold/.bitcoingold
+      - ./config/testnet/bitcoingold.conf:/bitcoingold/.bitcoingold/bitcoingold.conf
