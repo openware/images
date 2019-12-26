@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   mainnet:
-    image: reg.openware.work/cryptonode/bgoldd:0.15.2
+    image: quay.io/openware/bgoldd:0.15.2
     restart: always
     user: root
     command: bgoldd
@@ -13,7 +13,7 @@ services:
       - ./config/mainnet/bitcoingold.conf:/bitcoingold/.bitcoingold/bitcoingold.conf
 
   testnet:
-    image: reg.openware.work/cryptonode/bgoldd:0.15.2
+    image: quay.io/openware/bgoldd:0.15.2
     restart: always
     user: root
     command: bgoldd
