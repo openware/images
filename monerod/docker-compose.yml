@@ -1,6 +1,38 @@
 version: '3.6'
 
 services:
+  mainnet-monerod:
+    image: reg.openware.work/cryptonode/monerod:0.15.0.1
+    restart: always
+    command: ./monerod --non-interactive --config-file=/home/monero/.bitmonero/mainnet/bitmonero.conf
+    user: root
+    ports:
+      - "18081:18081"
+    volumes:
+      - ./blocks/mainnet:/home/monero/.bitmonero/lmdb
+      - ./config/mainnet/bitmonero.conf:/home/monero/.bitmonero/mainnet/bitmonero.conf
+
+  mainnet-wallet-deposit:
+    image: reg.openware.work/cryptonode/monerod:0.15.0.1
+    restart: always
+    command: ./monero-wallet-rpc --non-interactive --config-file=/home/monero/.bitmonero/mainnet/monero-deposit-wallet-rpc.conf
+    user: root
+    ports:
+      - "18082:18082"
+    volumes:
+      - ./keys/mainnet/deposit:/home/monero/wallets
+      - ./config/mainnet/monero-deposit-wallet-rpc.conf:/home/monero/.bitmonero/mainnet/monero-deposit-wallet-rpc.conf
+  mainnet-wallet-hot:
+    image: reg.openware.work/cryptonode/monerod:0.15.0.1
+    restart: always
+    command: ./monero-wallet-rpc --non-interactive --config-file=/home/monero/.bitmonero/mainnet/monero-hot-wallet-rpc.conf
+    user: root
+    ports:
+      - "18083:18083"
+    volumes:
+      - ./keys/mainnet/hot:/home/monero/wallets
+      - ./config/mainnet/monero-hot-wallet-rpc.conf:/home/monero/.bitmonero/mainnet/monero-hot-wallet-rpc.conf
+
   stagenet-monerod:
     image: reg.openware.work/cryptonode/monerod:0.15.0.1
     restart: always
@@ -12,13 +44,24 @@ services:
       - ./blocks/stagenet:/home/monero/.bitmonero/stagenet/lmdb
       - ./config/stagenet/bitmonero.conf:/home/monero/.bitmonero/stagenet/bitmonero.conf
 
-  stagenet-wallet:
+  stagenet-wallet-deposit:
     image: reg.openware.work/cryptonode/monerod:0.15.0.1
     restart: always
-    command: ./monero-wallet-rpc --stagenet --non-interactive --config-file=/home/monero/.bitmonero/stagenet/monero-wallet-rpc.conf
+    command: ./monero-wallet-rpc --stagenet --non-interactive --config-file=/home/monero/.bitmonero/stagenet/monero-deposit-wallet-rpc.conf
     user: root
     ports:
       - "38082:38082"
     volumes:
-      - ./keys/stagenet:/home/monero/wallets
-      - ./config/stagenet/monero-wallet-rpc.conf:/home/monero/.bitmonero/stagenet/monero-wallet-rpc.conf
+      - ./keys/stagenet/deposit:/home/monero/wallets
+      - ./config/stagenet/monero-deposit-wallet-rpc.conf:/home/monero/.bitmonero/stagenet/monero-deposit-wallet-rpc.conf
+
+  stagenet-wallet-hot:
+    image: reg.openware.work/cryptonode/monerod:0.15.0.1
+    restart: always
+    command: ./monero-wallet-rpc --stagenet --non-interactive --config-file=/home/monero/.bitmonero/stagenet/monero-hot-wallet-rpc.confg
+    user: root
+    ports:
+      - "38083:38083"
+    volumes:
+      - ./keys/stagenet/hot:/home/monero/wallets
+      - ./config/stagenet/monero-hot-wallet-rpc.conf:/home/monero/.bitmonero/stagenet/monero-hot-wallet-rpc.conf
