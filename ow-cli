@@ -53,6 +53,7 @@ module OpenwareCli
     def images
       IO.popen('git log -1 --stat').read
         .split("\n").map { |s| (m = s.match(%r{^ ([^/]+)/})) && m[1] }
+        .compact.map { |s| (m = s.match(/{\w+ => (\w+)}/)) && m[1] || s }
         .compact.uniq
     end
   end
