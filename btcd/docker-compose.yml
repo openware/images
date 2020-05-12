@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   mainnet:
-    image: reg.openware.work/cryptonode/btcd:0.20.1-beta
+    image: quay.io/openware/btcd:0.20.1-beta
     restart: always
     ports:
       - "0.0.0.0:8334:8334"
@@ -11,7 +11,7 @@ services:
       - ./config/mainnet-btcd.conf:/btc/.btcd/btcd.conf
 
   testnet:
-    image: reg.openware.work/cryptonode/btcd:0.20.1-beta
+    image: quay.io/openware/btcd:0.20.1-beta
     restart: always
     ports:
       - "0.0.0.0:18334:18334"
