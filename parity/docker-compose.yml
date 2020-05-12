@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   mainnet:
-    image: reg.openware.work/cryptonode/parity:2.5.13
+    image: quay.io/openware/parity:2.5.13
     restart: always
     user: root
     command: parity
@@ -14,7 +14,7 @@ services:
       - ./config/mainnet/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
 
   kovan:
-    image: reg.openware.work/cryptonode/parity:2.5.13
+    image: quay.io/openware/parity:2.5.13
     restart: always
     user: root
     command: parity
@@ -26,7 +26,7 @@ services:
       - ./config/kovan/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
 
   classic:
-    image: reg.openware.work/cryptonode/parity:2.5.13
+    image: quay.io/openware/parity:2.5.13
     restart: always
     user: root
     command: parity
@@ -38,7 +38,7 @@ services:
       - ./config/classic/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
 
   kotti:
-    image: reg.openware.work/cryptonode/parity:2.5.13
+    image: quay.io/openware/parity:2.5.13
     restart: always
     user: root
     command: parity

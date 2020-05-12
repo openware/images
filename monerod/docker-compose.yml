@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   stagenet-monerod:
-    image: reg.openware.work/cryptonode/monerod:0.15.0.1
+    image: quay.io/openware/monerod:0.15.0.1
     restart: always
     command: ./monerod --stagenet --non-interactive 
     user: root
@@ -13,7 +13,7 @@ services:
       - ./config/stagenet/bitmonero.conf:/home/monero/.bitmonero/stagenet/bitmonero.conf
 
   stagenet-wallet:
-    image: reg.openware.work/cryptonode/monerod:0.15.0.1
+    image: quay.io/openware/monerod:0.15.0.1
     restart: always
     command: ./monero-wallet-rpc --stagenet --non-interactive --config-file=/home/monero/.bitmonero/stagenet/monero-wallet-rpc.conf
     user: root
