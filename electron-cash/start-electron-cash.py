@@ -21,7 +21,7 @@ config_options = {
     'testnet': os.getenv("TESTNET", "true") == "true",
     "rpcuser": os.getenv("ELECTRUM_USER", "electrum"),
     "rpcpassword": os.getenv("ELECTRUM_PASSWORD", "changeme"),
-    "rpcport": 7001,
+    "rpcport": 7000,
     "rpchost": "0.0.0.0",
     'cwd': os.getcwd(),
     'auto_connect': True,

@@ -23,7 +23,7 @@ RUN mkdir -p ${ELECTRONCASH_HOME}/.electron-cash/ /data && \
 USER $ELECTRONCASH_USER
 WORKDIR $ELECTRONCASH_HOME
 VOLUME /data
-EXPOSE 7001
+EXPOSE 7000
 
 COPY start-electron-cash.py /usr/local/bin/
 CMD ["/usr/local/bin/start-electron-cash.py"]
