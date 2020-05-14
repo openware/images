@@ -63,6 +63,7 @@ if __name__ == '__main__':
             raise Exception("Failed to load wallet")
         d.cmd_runner.wallet = wallet
         daemon.run_hook('load_wallet', wallet, None)
+        d.server.register_function(lambda: wallet.get_local_height(), 'get_local_height')
         d.join()
         sys.exit(0)
     else:
