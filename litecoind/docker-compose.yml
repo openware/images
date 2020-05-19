@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: quay.io/openware/litecoin:0.17.1
+    restart: always
+    user: root
+    command: litecoind
+    ports:
+      - "9332:9332"
+    volumes:
+      - ./keys/mainnet:/litecoin/wallet
+      - ./blocks/mainnet:/litecoin/.litecoin/blocks
+      - ./config/mainnet.conf:/litecoin/.litecoin/litecoin.conf
+
+  testnet:
+    image: quay.io/openware/litecoin:0.17.1
+    restart: always
+    user: root
+    command: litecoind
+    ports:
+      - "19332:19332"
+    volumes:
+      - ./keys/testnet:/litecoin/wallet
+      - ./blocks/testnet:/litecoin/.litecoin/testnet3/blocks
+      - ./config/testnet.conf:/home/litecoin/.litecoin/litecoin.conf
