@@ -1,0 +1,24 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: quay.io/openware/dashd:0.15.0.0
+    restart: always
+    user: root
+    ports:
+      - "9998:9998"
+    volumes:
+      - ./keys/mainnet:/dash/wallet
+      - ./blocks/mainnet:/dash/.dashcore/blocks
+      - ./config/mainnet-dash.conf:/dash/.dashcore/dash.conf
+
+  testnet:
+    image: quay.io/openware/dashd:0.15.0.0
+    restart: always
+    user: root
+    ports:
+      - "19998:19998"
+    volumes:
+      - ./keys/testnet:/dash/wallet
+      - ./blocks/testnet:/dash/.dashcore/testnet3/blocks
+      - ./config/testnet-dash.conf:/dash/.dashcore/dash.conf
