@@ -13,9 +13,10 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y wget ca-certifica
 
 COPY checksum.sha256 /root
 
-RUN cd /root && \
+RUN set -x && \
+	cd /root && \
     wget -q https://bitcoincore.org/bin/bitcoin-core-${VERSION}/bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz && \
-	cat checksum.sha256 | grep ${VERSION} | sha256sum -c  &&\
+	cat checksum.sha256 | grep ${VERSION} | sha256sum -c  && \
     tar xvf bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz && \
     cd bitcoin-${VERSION} && \
     mv bin/* /usr/bin/ && \

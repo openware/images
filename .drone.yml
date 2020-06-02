@@ -17,7 +17,7 @@
         - gem update bundler
         - bundle install
         - curl -fsSL https://get.docker.com | bash
-        - docker login reg.openware.work -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+        - docker login quay.io -u $REGISTRY_USER -p $REGISTRY_PASSWORD
         - bundle exec ruby ow-cli incremental-build --push
 
   volumes:
@@ -50,7 +50,7 @@
         - gem update bundler
         - bundle install
         - curl -fsSL https://get.docker.com | bash
-        - docker login reg.openware.work -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+        - docker login quay.io -u $REGISTRY_USER -p $REGISTRY_PASSWORD
         - bundle exec ruby ow-cli incremental-build
 
   volumes:

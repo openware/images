@@ -1,0 +1,21 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: quay.io/openware/btcd:0.20.1-beta
+    restart: always
+    ports:
+      - "0.0.0.0:8334:8334"
+    volumes:
+      - ./data/mainnet:/btc/.btcd
+      - ./config/mainnet-btcd.conf:/btc/.btcd/btcd.conf
+
+  testnet:
+    image: quay.io/openware/btcd:0.20.1-beta
+    restart: always
+    ports:
+      - "0.0.0.0:18334:18334"
+    volumes:
+    volumes:
+      - ./data/testnet:/btc/.btcd
+      - ./config/testnet-btcd.conf:/btc/.btcd/btcd.conf
