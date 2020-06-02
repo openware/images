@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: quay.io/openware/bitcoincash:0.21.7
+    restart: always
+    user: root
+    command: bitcoind
+    ports:
+      - "8332:8332"
+    volumes:
+      - ./keys/mainnet:/bitcoincash/wallet
+      - ./blocks/mainnet:/bitcoincash/.bitcoin/blocks
+      - ./config/mainnet-bch.conf:/bitcoincash/.bitcoin/bitcoin.conf
+
+  testnet:
+    image: quay.io/openware/bitcoincash:0.21.7
+    restart: always
+    user: root
+    command: bitcoind
+    ports:
+      - "18332:18332"
+    volumes:
+      - ./keys/testnet:/bitcoincash/wallet
+      - ./blocks/testnet:/bitcoincash/.bitcoin/testnet3/blocks
+      - ./config/testnet-bch.conf:/bitcoincash/.bitcoin/bitcoin.conf
