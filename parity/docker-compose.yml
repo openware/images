@@ -5,7 +5,7 @@ services:
     image: quay.io/openware/parity:2.7.2
     restart: always
     user: root
-    command: parity
+    command: parity --no-persistent-txqueue
     ports:
       - "8545:8545"
     volumes:
