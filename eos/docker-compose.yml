@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  nodeos:
+    container_name: nodeos
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: nodeos --config-dir /root/.local/share/eosio/nodeos/config/ --config config.ini --logconf /root/.local/share/eosio/nodeos/config/logging.json --genesis-json /root/.local/share/eosio/nodeos/config/genesis.json --delete-all-blocks
+    stop_grace_period: 3m0s
+    volumes:
+      - ./contracts/:/root/contracts
+      - ./configs/logging.json:/root/.local/share/eosio/nodeos/config/logging.json
+      - ./configs/genesis.json:/root/.local/share/eosio/nodeos/config/genesis.json
+      - ./configs/config.ini:/root/.local/share/eosio/nodeos/config/config.ini
+    ports:
+      - '8888:8888'
+      - '9830:9876'
+    depends_on:
+      - keosd
+
+  keosd:
+    container_name: keosd
+    hostname: keosd
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: keosd --http-server-address=0.0.0.0:8901 --http-validate-host 0 --verbose-http-errors --unlock-timeout=9999999
+    volumes:
+      - ./default.wallet:/root/eosio-wallet/default.wallet
+    expose:
+      - 8901
+    ports:
+      - '8901:8901'
+
