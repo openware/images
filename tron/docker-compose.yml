@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  node-dev:
+    image: trontools/quickstart:2.0.17
+    environment:
+      defaultBalance: '100000'
+      showQueryString: 'true'
+      showBody: 'true'
+      formatJson: 'true'
+    ports:
+      - 9090:9090
