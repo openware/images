@@ -1,0 +1,88 @@
+version: '3'
+
+services:
+
+  proxy:
+    image: trontools/tron-proxy
+    container_name: tron-proxy
+    ports:
+    - 9091:9091
+    networks:
+      tron:
+        aliases:
+        - proxy.tron
+    environment:
+    - showQueryString=true
+    - showBody=true
+    - formatJson=true
+#    - accounts=20
+#    - defaultBalance=100000
+#    - useDefaultPrivateKey=true
+#    - mnemonic="some mnemonic phrase"
+#    - seed=ushwe63hgeWUS
+#    - hdPath=m/44'/60'/0'/0
+
+  java.tron:
+    image: trontools/tron-private
+    container_name: tron-private
+    expose:
+    - 18190
+    - 18191
+    networks:
+      tron:
+        aliases:
+        - java.tron
+# If you uncomment any of the following env variables,
+# be sure that you remove the current tron-private container,
+# before running again `docker-compose up`.
+    environment:
+    - allowTvmTransferTrc10=1
+    - allowSameTokenName=1
+#    - allowDelegateResource=1
+
+  events:
+    image: trontools/tron-events
+    container_name: tron-events
+    expose:
+    - 8060
+    ports:
+    - 8061:8060
+    networks:
+      tron:
+        aliases:
+        - events.tron
+    environment:
+    - PGPASSWORD=pgpass
+    - PGDATABASE=events
+    - PGUSER=postgres
+
+  redis:
+    image: redis
+    container_name: tron-redis
+    expose:
+    - 6379
+    ports:
+    - 6380:6379
+    networks:
+      tron:
+        aliases:
+        - redis.tron
+
+  postgres:
+    image: postgres
+    container_name: tron-postgres
+    expose:
+    - 5432
+    ports:
+    - 5433:5432
+    networks:
+      tron:
+        aliases:
+        - postgres.tron
+    environment:
+    - POSTGRES_PASSWORD=pgpass
+    - POSTGRES_USER=postgres
+    - POSTGRES_DB=events
+
+networks:
+  tron:

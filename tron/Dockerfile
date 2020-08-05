@@ -11,7 +11,6 @@ RUN cd app && npm install
 
 # Configures full node
 RUN mkdir FullNode
-ADD conf/full.conf FullNode/fullnode.conf
 ADD conf/FullNode.jar FullNode/FullNode.jar
 
 RUN mkdir BlockParser

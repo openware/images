@@ -1,9 +1,8 @@
 version: '3'
 
 services:
-
-  node-dev:
-    image: trontools/quickstart:2.0.17
+  mainet:
+    image: quay.io/openware/tron:2.1.1
     environment:
       defaultBalance: '100000'
       showQueryString: 'true'
@@ -11,3 +10,16 @@ services:
       formatJson: 'true'
     ports:
       - 9090:9090
+    volumes:
+      - ./conf/mainet.conf:/tron/FullNode/fullnode.conf
+
+  testnet:
+    image: quay.io/openware/tron:2.1.1
+    environment:
+      showQueryString: 'true'
+      showBody: 'true'
+      formatJson: 'true'
+    ports:
+      - 9090:9090
+    volumes:
+      - ./conf/testnet.conf:/tron/FullNode/fullnode.conf

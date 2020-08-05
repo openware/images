@@ -9,5 +9,3 @@ if [[ $preapprove != '' ]]; then
    done <<< "$preapprove"
 
 fi
-
-echo "}" >> /tron/FullNode/fullnode.conf

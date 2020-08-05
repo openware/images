@@ -109,13 +109,13 @@ app.use(bodyParser.json({limit: '100mb'}))
 app.use('/walletsolidity', proxy({
   ...conf,
   onProxyRes: setHeaders('SOLIDITY-NODE'),
-  target: 'http://127.0.0.1:18191'
+  target: 'http://127.0.0.1:8091'
 }));
 
 app.use('/wallet', proxy({
   ...conf,
   onProxyRes: setHeaders('FULL-NODE'),
-  target: 'http://127.0.0.1:18190'
+  target: 'http://127.0.0.1:8090'
 }));
 
 app.use('/favicon.ico', function (req, res) {

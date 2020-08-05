@@ -22,7 +22,4 @@ PRIVATE_NETWORK=yes pm2 start process.json)
 # run blockparser
 (cd BlockParser && nohup ./run.sh >/dev/null 2>&1 &)
 
-echo "Start the http proxy for dApps..."
-nohup scripts/accounts-generation.sh > /dev/null 2>&1 &
-
 node /tron/app
