@@ -18,9 +18,9 @@ RUN set -x && apk --update-cache add --virtual build-dependencies gcc musl-dev o
 	pip3 install ${ELECTRUM_VERSION}.tar.gz && \
 	apk del build-dependencies
 
-RUN mkdir -p ${ELECTRUM_HOME}/.electrum/ /data && \
-	ln -sf ${ELECTRUM_HOME}/.electrum/ /data && \
-	chown ${ELECTRUM_USER} ${ELECTRUM_HOME}/.electrum /data
+RUN mkdir -p ${ELECTRUM_HOME}/.electrum-ltc/ /data && \
+	ln -sf ${ELECTRUM_HOME}/.electrum-ltc/ /data && \
+	chown ${ELECTRUM_USER} ${ELECTRUM_HOME}/.electrum-ltc /data
 
 USER $ELECTRUM_USER
 WORKDIR $ELECTRUM_HOME

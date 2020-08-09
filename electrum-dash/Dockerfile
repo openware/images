@@ -18,9 +18,9 @@ RUN set -x && apk --update-cache add --virtual build-dependencies gcc musl-dev o
 	apk del build-dependencies gcc musl-dev openssl-dev && \
 	rm -f Dash-Electrum-${ELECTRUM_VERSION}.tar.gz
 
-RUN mkdir -p ${ELECTRUM_HOME}/.electrum/ /data && \
-	ln -sf ${ELECTRUM_HOME}/.electrum/ /data && \
-	chown ${ELECTRUM_USER} ${ELECTRUM_HOME}/.electrum /data
+RUN mkdir -p ${ELECTRUM_HOME}/.electrum-dash/ /data && \
+	ln -sf ${ELECTRUM_HOME}/.electrum-dash/ /data && \
+	chown ${ELECTRUM_USER} ${ELECTRUM_HOME}/.electrum-dash /data
 
 USER $ELECTRUM_USER
 WORKDIR $ELECTRUM_HOME
