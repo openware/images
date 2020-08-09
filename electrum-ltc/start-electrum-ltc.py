@@ -38,7 +38,7 @@ if __name__ == '__main__':
     passphrase = os.getenv("WALLET_PASSPHRASE")
     segwit = os.getenv("SEGWIT") == "true"
     seed = os.getenv("WALLET_SEED")
-    gap_limit = os.getenv("GAP_LIMIT", 20)
+    gap_limit = int(os.getenv("GAP_LIMIT", "20"))
 
     if passphrase is None:
         raise Exception("WALLET_PASSPHRASE unset")

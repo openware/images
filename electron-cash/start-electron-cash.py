@@ -38,7 +38,7 @@ if __name__ == '__main__':
     config = SimpleConfig(config_options)
     storage = WalletStorage(config.get_wallet_path())
     seed = os.getenv("WALLET_SEED")
-    gap_limit = os.getenv("GAP_LIMIT", 20)
+    gap_limit = int(os.getenv("GAP_LIMIT", "20"))
 
     if not storage.file_exists():
         print_msg("Wallet doesn't exist, creating...")

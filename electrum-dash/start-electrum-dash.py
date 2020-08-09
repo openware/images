@@ -37,7 +37,7 @@ _logger = get_logger(__name__)
 if __name__ == '__main__':
     passphrase = os.getenv("WALLET_PASSPHRASE")
     seed = os.getenv("WALLET_SEED")
-    gap_limit = os.getenv("GAP_LIMIT", 20)
+    gap_limit = int(os.getenv("GAP_LIMIT", "20"))
 
     if passphrase is None:
         raise Exception("WALLET_PASSPHRASE unset")
