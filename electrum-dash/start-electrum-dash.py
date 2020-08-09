@@ -13,7 +13,7 @@ from electrum_dash.logging import configure_logging
 from electrum_dash.util import create_and_start_event_loop
 from electrum_dash.network import filter_version, Network
 from electrum_dash.util import create_and_start_event_loop, log_exceptions
-from electrum_dash.wallet import create_new_wallet
+from electrum_dash.wallet import create_new_wallet, restore_wallet_from_text
 from electrum_dash.logging import get_logger
 
 def init_plugins(config, gui_name):
@@ -36,6 +36,8 @@ _logger = get_logger(__name__)
 
 if __name__ == '__main__':
     passphrase = os.getenv("WALLET_PASSPHRASE")
+    seed = os.getenv("WALLET_SEED")
+    gap_limit = os.getenv("GAP_LIMIT", 20)
 
     if passphrase is None:
         raise Exception("WALLET_PASSPHRASE unset")
@@ -53,13 +55,20 @@ if __name__ == '__main__':
         path = config.get_wallet_path()
         if os.path.exists(path) is False:
             _logger.warn("Wallet doesn't exist, creating")
-            create_new_wallet(path=path,
-                              password=passphrase,
-                              encrypt_file=True)
+            if seed is not None:
+                restore_wallet_from_text(seed,
+                                     path=path,
+                                     password=passphrase,
+                                     encrypt_file=True)
+            else:
+                create_new_wallet(path=path,
+                                  password=passphrase,
+                                  encrypt_file=True)
         wallet = d.load_wallet(path, passphrase)
         if wallet is None:
             raise Exception("Failed to load wallet")
         d.cmd_runner.wallet = wallet
+        wallet.change_gap_limit( gap_limit )
         daemon.run_hook('load_wallet', wallet, None)
         d.server.register_function(lambda: wallet.get_local_height(), 'get_local_height')
         d.join()
