@@ -1,0 +1,20 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: quay.io/openware/rippled:1.5.0
+    restart: always
+    user: root
+    ports:
+      - "51234:51234"
+    volumes:
+      - ./config/:/config/
+
+  testnet:
+    image: quay.io/openware/rippled:1.5.0
+    restart: always
+    user: root
+    ports:
+      - "51234:51234"
+    volumes:
+      - ./config-testnet/:/config/
