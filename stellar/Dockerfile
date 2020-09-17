@@ -1,8 +1,5 @@
 FROM debian:stretch
 
-ENV STELLAR_CORE_VERSION 13.2.0-1260-e45018ea
-ENV HORIZON_VERSION 1.5.0
-
 EXPOSE 5432
 EXPOSE 8000
 EXPOSE 11625
@@ -12,17 +9,22 @@ RUN apt-get update \
   && apt-get install -y wget curl git libpq-dev libsqlite3-dev libsasl2-dev postgresql-client sudo vim zlib1g-dev jq netcat \
   && apt-get clean
 
-# stellar-core
-RUN wget -O stellar-core.deb https://s3.amazonaws.com/stellar.org/releases/stellar-core/stellar-core-${STELLAR_CORE_VERSION}_amd64.deb \
-  && dpkg -i stellar-core.deb \
-  && rm stellar-core.deb
+ARG VERSION
+COPY VERSION_HORIZON .
+COPY checksum.sha256 .
 
-# horizon
-RUN wget -O horizon.tar.gz https://github.com/stellar/go/releases/download/horizon-v${HORIZON_VERSION}/horizon-v${HORIZON_VERSION}-linux-amd64.tar.gz \
-  && tar -zxvf horizon.tar.gz \
-  && mv /horizon-v${HORIZON_VERSION}-linux-amd64/horizon /usr/local/bin \
+# Links were taken from official image: https://github.com/stellar/docker-stellar-core-horizon/blob/master/install
+# Stellar-core & Horizon
+
+RUN wget -q https://s3.amazonaws.com/stellar.org/releases/stellar-core/stellar-core-${VERSION}_amd64.deb \
+  && wget -q https://github.com/stellar/go/releases/download/horizon-v$(cat VERSION_HORIZON)/horizon-v$(cat VERSION_HORIZON)-linux-amd64.tar.gz \
+  && sha256sum -c checksum.sha256 \
+  && dpkg -i stellar-core-${VERSION}_amd64.deb \
+  && rm stellar-core-${VERSION}_amd64.deb \
+  && tar -zxvf horizon-v$(cat VERSION_HORIZON)-linux-amd64.tar.gz \
+  && mv /horizon-v$(cat VERSION_HORIZON)-linux-amd64/horizon /usr/local/bin \
   && chmod +x /usr/local/bin/horizon \
-  && rm -rf horizon.tar.gz /horizon-v${HORIZON_VERSION}-linux-amd64
+  && rm -rf horizon-v$(cat VERSION_HORIZON)-linux-amd64.tar.gz /horizon-v$(cat VERSION_HORIZON)-linux-amd64
 
 RUN ["mkdir", "-p", "/opt/stellar"]
 
