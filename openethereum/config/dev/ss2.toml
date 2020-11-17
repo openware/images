@@ -1,0 +1,39 @@
+[parity]
+mode = "active"
+mode_timeout = 300
+mode_alarm = 3600
+no_persistent_txqueue = true
+chain = "dev"
+base_path = "/parity/.local/share/io.parity.ethereum"
+db_path = "/parity/.local/share/io.parity.ethereum/chains"
+keys_path = "/parity/.local/share/io.parity.ethereum/keys"
+
+[network]
+port = 30303
+allow_ips = "all"
+max_pending_peers = 512
+
+[account]
+password = ["/parity/.local/share/io.parity.ethereum/ss2.pw"]
+
+[secretstore]
+disable = false
+disable_http = false      # This node will expose a Secret Store HTTP API
+self_secret = "8b21c74c79cd94664e8f0a1d7cae2d83278b333c"
+http_interface = "all"  # The HTTP API is available locally only
+http_port = 8010          # The Secret Store HTTP API is available at this port
+acl_contract = "none"     # Insecure, will be changed later on
+server_set_contract = "none"
+nodes = []
+interface = "local"
+port = 8011               # port used to communicated with other Secret Store nodes
+path = "/parity/.local/share/io.parity.ethereum/secretstore"
+
+
+[rpc]
+disable = false
+port = 8545
+interface = "0.0.0.0"
+hosts = ["*"]
+apis = ["web3", "eth", "net","parity","parity_accounts","personal", "traces", "secretstore", "parity_pubsub"]
+
