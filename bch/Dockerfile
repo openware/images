@@ -16,7 +16,7 @@ COPY checksum.sha256 /tmp/checksum.sha256
 
 RUN set -ex \
 	&& cd /tmp \
-	&& wget -qO bitcoin-cash.tar.gz "https://download.bitcoinabc.org/$(cat VERSION)/linux/bitcoin-abc-$(cat VERSION)-x86_64-linux-gnu.tar.gz" \
+	&& wget -qO bitcoin-cash.tar.gz "https://download.bitcoinabc.org/bchn/$(cat VERSION)/linux/bitcoin-abc-$(cat VERSION)-x86_64-linux-gnu.tar.gz" \
 	&& cat checksum.sha256 | sha256sum -c - \
 	&& tar -xzvf bitcoin-cash.tar.gz -C /usr/local --strip-components=1 --exclude=*-qt \
 	&& rm -rf /tmp/*

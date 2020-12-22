@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   mainnet:
-    image: quay.io/openware/dashd:0.15.0.0
+    image: quay.io/openware/dashd:0.16.1.1
     restart: always
     user: root
     ports:
@@ -13,7 +13,7 @@ services:
       - ./config/mainnet-dash.conf:/dash/.dashcore/dash.conf
 
   testnet:
-    image: quay.io/openware/dashd:0.15.0.0
+    image: quay.io/openware/dashd:0.16.1.1
     restart: always
     user: root
     ports:
