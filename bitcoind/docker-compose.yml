@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   mainnet:
-    image: quay.io/openware/bitcoind:0.19.1
+    image: quay.io/openware/bitcoind:0.20.1
     restart: always
     user: root
     command: bitcoind
@@ -14,7 +14,7 @@ services:
       - ./config/mainnet-bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
 
   testnet:
-    image: quay.io/openware/bitcoind:0.19.1
+    image: quay.io/openware/bitcoind:0.20.1
     restart: always
     user: root
     command: bitcoind
