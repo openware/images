@@ -10,7 +10,7 @@ COPY checksum.sha256 .
 
 RUN cd \
 	&& wget -q https://github.com/Electron-Cash/Electron-Cash/releases/download/${VERSION}/Electron-Cash-${VERSION}.tar.gz \
-    && cat checksum.sha256 | grep ${VERSION} | sha256sum -c
+    && sha256sum -c checksum.sha256
 
 RUN useradd -m $ELECTRONCASH_USER && \
 	pip3 install ~/Electron-Cash-${VERSION}.tar.gz && \

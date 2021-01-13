@@ -13,7 +13,7 @@ ENV ELECTRUM_HOME /home/$ELECTRUM_USER
 RUN set -x && apk --update-cache add --virtual build-dependencies gcc musl-dev openssl-dev gmp-dev && \
 	adduser -D $ELECTRUM_USER && \
 	wget -q https://github.com/akhavr/electrum-dash/releases/download/${ELECTRUM_VERSION}/Dash-Electrum-${ELECTRUM_VERSION}.tar.gz && \
-	cat checksum.sha256 | grep ${VERSION} | sha256sum -c && \
+	sha256sum -c checksum.sha256 && \
 	pip3 install Dash-Electrum-${ELECTRUM_VERSION}.tar.gz && \
 	apk del build-dependencies gcc musl-dev openssl-dev && \
 	rm -f Dash-Electrum-${ELECTRUM_VERSION}.tar.gz
