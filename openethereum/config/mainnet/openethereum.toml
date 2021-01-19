@@ -29,6 +29,9 @@ tracing = "off"
 db_compaction = "ssd"
 cache_size = 4096
 
+[secretstore]
+disable = true # users do not run a secret store node
+
 [ui]
 disable = true
 
@@ -37,5 +40,5 @@ disable = false
 port = 8545
 interface = "0.0.0.0"
 hosts = ["*"]
-apis = ["web3", "eth", "net","parity","parity_accounts","personal", "traces", "rpc", "secretstore", "parity_pubsub"]
+apis = ["web3", "eth", "net","parity","parity_accounts","personal", "traces", "rpc", "parity_pubsub"]
 
