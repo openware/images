@@ -32,4 +32,4 @@ VOLUME /data
 EXPOSE 7000
 
 COPY start-electrum.py /usr/local/bin/
-CMD ["/usr/local/bin/start-electrum.py"]
+CMD ["kaigara", "/usr/local/bin/start-electrum.py"]

@@ -33,4 +33,4 @@ VOLUME /data
 EXPOSE 7000
 
 COPY start-electrum-ltc.py /usr/local/bin/
-CMD ["/usr/local/bin/start-electrum-ltc.py"]
+CMD ["kaigara", "/usr/local/bin/start-electrum-ltc.py"]
