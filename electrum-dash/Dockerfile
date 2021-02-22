@@ -32,5 +32,5 @@ WORKDIR $ELECTRUM_HOME
 VOLUME /data
 EXPOSE 7000
 
-COPY start-electrum-dash.py /usr/local/bin/
-CMD ["/usr/local/bin/start-electrum-dash.py"]
+COPY start-electrum.py /usr/local/bin/
+CMD ["/usr/local/bin/start-electrum.py"]
