@@ -22,6 +22,11 @@ RUN mkdir -p ${ELECTRUM_HOME}/.electrum-dash/ /data && \
 	ln -sf ${ELECTRUM_HOME}/.electrum-dash/ /data && \
 	chown ${ELECTRUM_USER} ${ELECTRUM_HOME}/.electrum-dash /data
 
+# Install Kaigara
+ARG KAIGARA_VERSION=0.1.9
+RUN wget -O /usr/bin/kaigara https://github.com/openware/kaigara/releases/download/${KAIGARA_VERSION}/kaigara \
+	&& chmod +x /usr/bin/kaigara
+
 USER $ELECTRUM_USER
 WORKDIR $ELECTRUM_HOME
 VOLUME /data
