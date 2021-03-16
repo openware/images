@@ -23,7 +23,7 @@ services:
     volumes:
       - ./keys/kovan:/parity/.local/share/io.parity.ethereum/keys
       - ./blocks/kovan:/parity/.local/share/io.parity.ethereum/chains
-      - ./config/kovan/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
+      - ./config/kovan/openethereum.toml:/parity/.local/share/io.parity.ethereum/config.toml
 
   classic:
     image: quay.io/openware/openethereum:3.1.0

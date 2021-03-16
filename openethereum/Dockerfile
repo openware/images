@@ -4,7 +4,7 @@ ARG VERSION
 
 RUN apt-get update && apt-get install -y git curl wget pwgen vim htop gcc g++ cmake
 
-RUN git clone https://github.com/openethereum/openethereum --branch=release/v${VERSION} \ 
+RUN git clone https://github.com/openethereum/openethereum --branch=v${VERSION} \ 
   && cd openethereum \
   && cargo build --features secretstore --release \
   && cp ./target/release/openethereum /openethereum
@@ -32,7 +32,6 @@ RUN set -x \
 	&& export GNUPGHOME="$(mktemp -d)" \
 	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
 	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-	&& rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
 	&& chmod +x /usr/local/bin/gosu \
 	&& gosu nobody true
 
