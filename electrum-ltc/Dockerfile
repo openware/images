@@ -23,7 +23,7 @@ RUN mkdir -p ${ELECTRUM_HOME}/.electrum-ltc/ /data && \
 	chown ${ELECTRUM_USER} ${ELECTRUM_HOME}/.electrum-ltc /data
 
 # Install Kaigara
-ARG KAIGARA_VERSION=0.1.9
+ARG KAIGARA_VERSION=0.1.23
 RUN wget -O /usr/bin/kaigara https://github.com/openware/kaigara/releases/download/${KAIGARA_VERSION}/kaigara \
 	&& chmod +x /usr/bin/kaigara
 
