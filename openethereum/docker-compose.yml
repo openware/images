@@ -1,0 +1,97 @@
+version: '3.6'
+
+services:
+  mainnet:
+    image: quay.io/openware/openethereum:3.1.0
+    restart: always
+    user: root
+    command: openethereum --no-persistent-txqueue
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/mainnet:/openethereum/.local/share/io.openethereum.ethereum/keys
+      - ./blocks/mainnet:/openethereum/.local/share/io.openethereum.ethereum/chains
+      - ./config/mainnet/openethereum.toml:/openethereum/.local/share/io.openethereum.ethereum/config.toml
+
+  kovan:
+    image: quay.io/openware/openethereum:3.1.0
+    restart: always
+    user: root
+    command: openethereum
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/kovan:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/kovan:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/kovan/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
+
+  classic:
+    image: quay.io/openware/openethereum:3.1.0
+    restart: always
+    user: root
+    command: parity
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/classic:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/classic:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/classic/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
+
+  kotti:
+    image: quay.io/openware/parity:3.1.0
+    restart: always
+    user: root
+    command: parity
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./keys/kotti:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/kotti:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/kotti/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
+
+
+  ss1:
+    image: quay.io/openware/openethereum:3.1.0
+    restart: always
+    user: root
+    command: openethereum
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+    volumes:
+      - ./keys/ss1:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/ss1:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/dev/ss1.toml:/parity/.local/share/io.parity.ethereum/config.toml
+      - ./config/dev/ss1.pw:/parity/.local/share/io.parity.ethereum/ss1.pw
+
+  ss2:
+    image: quay.io/openware/openethereum:3.1.0
+    restart: always
+    user: root
+    command: openethereum
+    volumes:
+      - ./keys/ss2:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/ss2:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/dev/ss2.toml:/parity/.local/share/io.parity.ethereum/config.toml
+      - ./config/dev/ss2.pw:/parity/.local/share/io.parity.ethereum/ss2.pw
+
+  ss3:
+    image: quay.io/openware/openethereum:3.1.0
+    restart: always
+    user: root
+    command: openethereum
+    volumes:
+      - ./keys/ss3:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/ss3:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/dev/ss3.toml:/parity/.local/share/io.parity.ethereum/config.toml
+      - ./config/dev/ss3.pw:/parity/.local/share/io.parity.ethereum/ss3.pw
+
+  dev:
+    image: quay.io/openware/openethereum:3.1.0
+    restart: always
+    user: root
+    command: openethereum
+    volumes:
+      - ./keys/dev:/parity/.local/share/io.parity.ethereum/keys
+      - ./blocks/dev:/parity/.local/share/io.parity.ethereum/chains
+      - ./config/dev/parity.toml:/parity/.local/share/io.parity.ethereum/config.toml
