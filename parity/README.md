@@ -65,4 +65,4 @@ To get account balance:
 curl --data '{"method":"eth_getBalance","params":["*account_address*"],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545
 ```
 
-Feel free to check [Parity JSON RPC API](https://wiki.parity.io/JSONRPC) for more calls.
+Feel free to check [Parity JSON RPC API](https://openethereum.github.io/JSONRPC) for more calls.
