@@ -1,0 +1,52 @@
+version: '3.6'
+
+services:
+  stellar-pg-testnet:
+    image: postgres:9
+    restart: on-failure
+    volumes:
+      - pg_data_testnet:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=stellar
+      - POSTGRES_USER=stellar
+      - POSTGRES_PASSWORD=changeme
+
+  stellar-node-testnet:
+    image: quay.io/openware/stellar:13.2.0-1260-e45018ea
+    restart: always
+    volumes:
+      - ./config/stellar-core-testnet.cfg:/stellar-core.cfg
+      - ./data/testnet:/data
+    environment:
+      INITIALIZE_DB: "true"
+      INITIALIZE_HISTORY_ARCHIVES: "true"
+#    ports:
+#    - 127.0.0.1:11625:11625
+#    - 127.0.0.1:11626:11626
+
+  stellar-pg-pubnet:
+    image: postgres:9
+    restart: on-failure
+    volumes:
+      - pg_data_pubnet:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=stellar
+      - POSTGRES_USER=stellar
+      - POSTGRES_PASSWORD=changeme
+
+  stellar-node-pubnet:
+    image: quay.io/openware/stellar:13.2.0-1260-e45018ea
+    restart: always
+    volumes:
+      - ./config/stellar-core-pubnet.cfg:/stellar-core.cfg
+      - ./data/pubnet:/data
+    environment:
+      INITIALIZE_DB: "true"
+      INITIALIZE_HISTORY_ARCHIVES: "true"
+#    ports:
+#    - 127.0.0.1:11625:11625
+#    - 127.0.0.1:11626:11626
+
+volumes:
+  pg_data_testnet:
+  pg_data_pubnet:
