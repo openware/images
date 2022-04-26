@@ -22,7 +22,7 @@ module OpenwareCli
     end
 
     def build(image)
-      shell("docker build -t quay.io/openware/#{image}:#{version(image)} --build-arg=VERSION=#{version(image)} #{image}")
+      shell("docker build --pull -t quay.io/openware/#{image}:#{version(image)} --build-arg=VERSION=#{version(image)} #{image}")
       shell("docker push quay.io/openware/#{image}:#{version(image)}") if push?
     end
 
