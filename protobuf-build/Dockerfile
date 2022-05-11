@@ -1,4 +1,6 @@
-FROM golang:1.17
+ARG VERSION
+
+FROM golang:${VERSION}
 
 RUN apt-get update && \
  apt-get install -y unzip npm
