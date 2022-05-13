@@ -11,9 +11,9 @@ ARG VERSION
 
 RUN apt-get update && apt-get install unzip
 
-RUN wget -q https://github.com/testground/testground/archive/e8812beb885e2ab6b9488eb6202f6d8146da3001.zip -O tg.zip \
+RUN wget -q https://github.com/testground/testground/archive/refs/heads/master.zip -O tg.zip \
   && unzip -q tg.zip \
-  && mv testground-e8812beb885e2ab6b9488eb6202f6d8146da3001 /app
+  && mv testground-master /app
 
 WORKDIR /app
 
