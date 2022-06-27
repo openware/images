@@ -1,5 +1,5 @@
 # GO_VERSION is the golang version this image will be built against.
-ARG GO_VERSION=1.16
+ARG GO_VERSION=1.17
 
 # BUILD CONTAINER
 
