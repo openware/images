@@ -1,6 +1,7 @@
-FROM bitnami/postgresql:13-debian-10
-
 ARG VERSION
+
+FROM bitnami/postgresql:${VERSION}
+
 USER root
 ENV PG_CRON_VERSION 1.4.1
 
