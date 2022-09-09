@@ -1,8 +1,8 @@
-FROM golang:1.17-alpine
+FROM golang:1.18-alpine
 
 RUN apk add --no-cache curl make git vim
 
-ARG KAIGARA_VERSION=v1.0.15
+ARG KAIGARA_VERSION=v1.0.21
 RUN curl -Lo /usr/bin/kai https://github.com/openware/kaigara/releases/download/${KAIGARA_VERSION}/kai_linux_amd64 \
   && chmod +x /usr/bin/kai
 
