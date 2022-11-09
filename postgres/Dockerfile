@@ -25,7 +25,8 @@ RUN git clone https://github.com/graphql/libgraphqlparser -b 0.7.0 /tmp/libgraph
     && cmake . \
     && make -C /tmp/libgraphqlparser \
     && make -C /tmp/libgraphqlparser install \
-    && rm -rf /tmp/libgraphqlparser && cd
+    && rm -rf /tmp/libgraphqlparser \
+    && cp /usr/local/lib/libgraphqlparser.so /opt/bitnami/postgresql/lib/ && cd
 
 RUN curl -JL -o /tmp/pg_graphql.tar.gz https://github.com/supabase/pg_graphql/archive/refs/tags/v$PG_GRAPHQL_VERSION.tar.gz \
     && tar xzf /tmp/pg_graphql.tar.gz -C /tmp \
